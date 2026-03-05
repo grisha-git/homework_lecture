@@ -8,6 +8,33 @@ struct BiList
   BiList< T >* prev;
 };
 
+//Task 2
+template< class T >
+BiList< T >* newHead(BiList< T >* head, const T& target);
+
+template< class T >
+BiList< T >* addAfter(BiList< T >* head, const T& target);
+
+template< class T >
+BiList< T >* deleteHead(BiList< T >* head) noexcept;
+
+template< class T >
+BiList< T >* deleteAfter(BiList< T >* head) noexcept;
+
+template< class T >
+BiList< T >* clear(BiList< T >* h, BiList< T >* e) noexcept;
+
+template< class T, class F >
+F traverse(F f, BiList< T >* h, BiList< T >* e);
+
+template< class T, class F >
+F reverseTraverse(F f, BiList< T >* h, BiList< T >* e);
+
+template< class T >
+BiList< T >* create(const T* array, size_t s);
+
+//Task 3
+
 template< class T >
 BiList< T >* newHead(BiList< T >* head, const T& target)
 {
@@ -82,4 +109,32 @@ F reverseTraverse(F f, BiList< T >* h, BiList< T >* e)
     h = h->prev;
   } while(h != e)
   return f;
+}
+
+template< class T >
+BiList< T >* create(const T* array, size_t s)
+{
+  if (s == 0)
+  {
+    return nullptr;
+  }
+  BiList< T >* head = new BiList< T >{array[0], nullptr, nullptr};
+  head->next = head;
+  head->prev = head;
+  BiList< T >* it = head;
+  for (size_t i = 1; i < s; ++i)
+  {
+    BiList< T >* temp = new BiList< T >{array[i], head, it};
+    it->next = temp;
+    it = temp;
+  }
+  return head;
+}
+
+int main()
+{
+  int* arr = new int[5]{1, 2, 3, 4, 5};
+  size_t size = 5;
+  BiList< int >* list = create(arr, size);
+
 }
