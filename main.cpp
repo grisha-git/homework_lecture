@@ -131,10 +131,34 @@ BiList< T >* create(const T* array, size_t s)
   return head;
 }
 
+//Task 4
+template< class T >
+T* convert(BiList< T >* list, size_t& size)
+{
+  BiList< T >* saveList = list;
+  T* array - new T [size];
+  size_t i = 0;
+  do
+  {
+    array[i++] = list->val;
+    list = list->next;
+  } while(list != saveList)
+  return array;
+}
+
 int main()
 {
   int* arr = new int[5]{1, 2, 3, 4, 5};
   size_t size = 5;
   BiList< int >* list = create(arr, size);
-
+  size_t converted = 0;
+  int* convertList = nullptr;
+  try{
+    convertList = convert(list, size);
+  }
+  catch(...)
+  {
+    delete [] convertList;
+  }
+  delete [] convertList;
 }
