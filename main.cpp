@@ -36,3 +36,39 @@ BiList< T >* deleteHead(BiList< T >* head) noexcept
   delete head;
   return temp;
 }
+
+template< class T >
+BiList< T >* deleteAfter(BiList< T >* head) noexcept
+{
+  BiList< T >* temp = head->next;
+  head->next = temp->next;
+  temp->next->prev = head;
+  delete temp;
+  return head;
+}
+
+template< class T >
+BiList< T >* clear(BiList< T >* h, BiList< T >* e) noexcept
+{
+  BiList< T >* temp = nullptr;
+  while (h != e)
+  {
+    temp = h->next;
+    h->prev->next = temp;
+    temp->prev = h->prev;
+    delete h;
+    h = temp;
+  }
+  return h;
+}
+
+template< class T, class F >
+F traverse(F f, BiList< T >* h, BiList< T >* e)
+{
+  while(h != e)
+  {
+    f(h->val);
+    h = h->next;
+  }
+  return f;
+}
