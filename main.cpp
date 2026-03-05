@@ -17,3 +17,12 @@ BiList< T >* newHead(BiList< T >* head, const T& target)
   delete head;
   return newNode;
 }
+
+template< class T >
+BiList< T >* addAfter(BiList< T >* head, const T& target)
+{
+  BiList< T >* newNode = new BiList< T >{target, head->next, head};
+  head->next = newNode;
+  newNode->next->prev = newNode;
+  return newNode;
+}
