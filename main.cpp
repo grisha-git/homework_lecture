@@ -65,10 +65,21 @@ BiList< T >* clear(BiList< T >* h, BiList< T >* e) noexcept
 template< class T, class F >
 F traverse(F f, BiList< T >* h, BiList< T >* e)
 {
-  while(h != e)
+  do
   {
     f(h->val);
     h = h->next;
-  }
+  } while(h != e)
+  return f;
+}
+
+template< class T, class F >
+F reverseTraverse(F f, BiList< T >* h, BiList< T >* e)
+{
+  do
+  {
+    f(h->val);
+    h = h->prev;
+  } while(h != e)
   return f;
 }
