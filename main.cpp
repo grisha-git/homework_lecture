@@ -26,3 +26,13 @@ BiList< T >* addAfter(BiList< T >* head, const T& target)
   newNode->next->prev = newNode;
   return newNode;
 }
+
+template< class T >
+BiList< T >* deleteHead(BiList< T >* head) noexcept
+{
+  BiList< T >* temp = head->next;
+  head->prev->next = head->next;
+  head->next->prev = head->prev;
+  delete head;
+  return temp;
+}
