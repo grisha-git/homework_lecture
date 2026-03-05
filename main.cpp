@@ -51,14 +51,14 @@ template< class T >
 BiList< T >* clear(BiList< T >* h, BiList< T >* e) noexcept
 {
   BiList< T >* temp = nullptr;
-  while (h != e)
+  do
   {
     temp = h->next;
     h->prev->next = temp;
     temp->prev = h->prev;
     delete h;
     h = temp;
-  }
+  } while (h != e)
   return h;
 }
 
